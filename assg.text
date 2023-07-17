@@ -1,0 +1,16 @@
+Assignment 3 - 
+Todo list 
+maintain a list of todo items  - keep a array in memory - [{ taskDetails : "do homework", id : 1}, { taskDetails : "sleep", id : 2}]
+function to add to the array
+function to remove a particular element in the array
+
+ 
+
+UI - 
+text box with save button
+click event on the save button, and call the add array function
+clear the text box
+list of items to be displayed after click - from the array - RENDER FUNCTION to create UI of the list 
+delete button next to each task in list 
+on click delete, pass ID of the task and remove from array
+rerender the list after delete

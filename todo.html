@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>To-Do Application</title>
+    <link href="todo.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="input_container">
+        <input
+          type="text"
+          name="to-do_task"
+          placeholder="Enter your task"
+          value=""
+        />
+        <button type="button" class="add_task">Add</button>
+      </div>
+      <div class="tasks_container">
+        <div class="task_item">
+          <div class="task_content">
+            <input type="text" value="Meeting at 10 pm" readonly />
+          </div>
+          <div class="actions">
+            <button type="button" class="delete_task">Del</button>
+            <button type="button" class="edit_task">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="todo.js"></script>
+  </body>
+</html>
