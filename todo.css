@@ -30,18 +30,6 @@ input {
   justify-content: space-around;
   margin-bottom: 2vh;
 }
-.task {
-  min-width: fit-content;
-  width: 200px;
-  margin-right: 2vw;
-
-  border: 1px solid black;
-  padding: 2%;
-}
-
-.task span {
-  max-height: fit-content;
-}
 .actions {
   display: flex;
   justify-content: space-between;
