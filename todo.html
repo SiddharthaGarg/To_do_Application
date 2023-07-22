@@ -14,18 +14,107 @@
           placeholder="Enter your task"
           value=""
         />
+
+        <label>
+          <span>Select category: </span>
+          <select class="categories">
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="Others">Others</option>
+          </select>
+        </label>
+        <label>
+          <span>Assign priority: </span>
+          <select class="priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </label>
+        <label>
+          <span> Due date: </span>
+          <input type="date" class="due_date" />
+        </label>
+
+        <div class="add_tags_section">
+          <input
+            type="text"
+            placeholder="enter new tag"
+            value=""
+            class="tags"
+          />
+          <button type="button" class="add_tags">Add tags</button>
+        </div>
+
         <button type="button" class="add_task">Add</button>
+        <div>
+          <button type="button" class="view_backlogs">view_backlogs</button>
+        </div>
       </div>
+      <div class="fss_container">
+        <div class="filter_section">
+          <label>
+            <span>Filter by priority: </span>
+            <select class="filter_priority">
+              <option value="All">All</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Filter by category: </span>
+            <select class="filter_category">
+              <option value="All">All</option>
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+              <option value="Others">Others</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Filter by due date: </span>
+            <input type="date" class="filter_duedate" />
+          </label>
+
+          <label>
+            <span>Sort by: </span>
+            <select class="sort_type">
+              <option value="None">None</option>
+              <option value="Priority">Priority</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
       <div class="tasks_container">
         <div class="task_item">
+          <label class="is_task_completed">
+            <input type="checkbox" />
+          </label>
           <div class="task_content">
             <input type="text" value="Meeting at 10 pm" readonly />
           </div>
-          <div class="actions">
-            <button type="button" class="delete_task">Del</button>
-            <button type="button" class="edit_task">Edit</button>
+          <div class="features">
+            <div class="actions">
+              <button type="button" class="delete_task">Del</button>
+              <button type="button" class="edit_task">Edit</button>
+            </div>
+            <div class="details">
+              <div>Personal</div>
+              <div>High</div>
+              <div>Today</div>
+            </div>
+            <div class="tags">
+              <span></span>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div class="backlogs_container">
+        <button type="button" class="go_back">Go Back</button>
       </div>
     </div>
 
