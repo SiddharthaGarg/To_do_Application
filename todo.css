@@ -15,11 +15,12 @@ input[type="text"] {
   border: 2px solid rgb(219, 219, 252);
 }
 .input_container,
-.fss_container {
+.fss_container,
+.search_bar_container {
   display: flex;
   justify-content: space-between;
   /* align-items: center; */
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 /* .fss_container {
   display: flex;

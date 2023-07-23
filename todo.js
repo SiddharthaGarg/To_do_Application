@@ -15,13 +15,13 @@
     //     })
     // }
     
-let backlogs = [];
 window.addEventListener('load', (e) => {
     todos = JSON.parse(localStorage.getItem('todos')) || [];
    
     const add_task = document.querySelector(".add_task");
     const add_tags = document.querySelector(".add_tags");
     const view_backlogs = document.querySelector(".view_backlogs");
+
 
     
     const filter_priority = document.querySelector(".filter_priority");
@@ -37,8 +37,10 @@ window.addEventListener('load', (e) => {
             tag_list.push(tag_value);
              document.querySelector(".tags").value = "";
 
-            })
-        add_task.addEventListener('click', (e) => {
+    })
+    
+        
+    add_task.addEventListener('click', (e) => {
         // console.log("add the new task");
             const categories = document.querySelector(".categories");
             const category_value = categories.options[categories.selectedIndex].value;
@@ -102,97 +104,142 @@ window.addEventListener('load', (e) => {
 
     })
     
-    DisplayTodos();
+   
 
     view_backlogs.addEventListener('click', (e) => {
-        const tasks_container = document.querySelector(".tasks_container");
-         tasks_container.style.display = 'none';
+        // const tasks_container = document.querySelector(".tasks_container");
+        //  tasks_container.style.display = 'none';
         DisplayBacklogs();
 
-        const go_back = document.querySelector('.go_back');
+        const go_back = document.querySelector(".go_back");
         go_back.addEventListener('click', e => {
-            const backlogs_container = document.querySelector(".backlogs_container");
-            backlogs_container.style.display = 'none';
-             tasks_container.style.display = 'flex';
+            // const backlogs_container = document.querySelector(".backlogs_container");
+            // backlogs_container.style.display = 'none';
+            //  tasks_container.style.display = 'flex';
+            DisplayTodos();
         })
     })
+
+    //Search functionality
+
+    const search_bar = document.querySelector(".search_bar");
+    search_bar.addEventListener('input', (e) => {
+        console.log(e.target.value);
+        const searchString = e.target.value;
+        DisplaySearchItems(searchString);
+        // const todoList = document.querySelector(".tasks_container");
+        // todoList.innerHTML = '';
+
+        // todos.forEach(todo => {
+        //     // let found = false;
+          
+        //     if (todo.title.includes(searchString) || todo.task_tags.includes(searchString, 0) )
+        //     {   
+        //         newtodos.push(todo);
+        //         const delete_task = helper(todo, todoList);
+        //         delete_task.addEventListener('click', e => {
+        //             console.log("delete task");
+        //             todos = todos.filter(t => {
+        //                 return t != todo;
+        //             })
+        //             newtodos = newtodos.filter(t => {
+        //                 return t != todo;
+        //             })
+        //             localStorage.setItem("todos", JSON.stringify(todos));
+        //             DisplaySearchItems(searchString);
+        //         })
+        //     }
+            
+        // })
+        
+    })
+
+     DisplayTodos();
 })
 
-function DisplayBacklogs()
-{
-    const backlogs_container = document.querySelector(".backlogs_container");
-    backlogs_container.innerHTML = '';
+// function RenderBacklogs()
+// {
+//     const backlogs_container = document.querySelector(".backlogs_container");
+//     backlogs_container.innerHTML = '';
 
-    const go_back = document.createElement("button");
-    go_back.type = "button";
-    go_back.classList.add("go_back");
-    go_back.innerHTML = "Go Back";
+    
 
-    backlogs_container.style.display = 'flex';
-    backlogs.forEach(backlog => {
-        const task_item = document.createElement("div");
+//     backlogs_container.style.display = 'flex';
+//     todos.forEach(todo => {
+//         if (!todo.completed) {
+//             const task_item = document.createElement("div");
         
-        const task_content = document.createElement("div");
+//             const task_content = document.createElement("div");
         
-        const features = document.createElement("div");
-        const details = document.createElement("div");
+//             const features = document.createElement("div");
+//             const details = document.createElement("div");
         
-        const category = document.createElement("div");
-        const priority = document.createElement("div");
-        const due_date = document.createElement("div");
+//             const category = document.createElement("div");
+//             const priority = document.createElement("div");
+//             const due_date = document.createElement("div");
 
-        const tags = document.createElement("div");
+//             const tags = document.createElement("div");
 
-        task_item.classList.add("task_item");
-        task_content.classList.add("task_content");
-        features.classList.add("features");
-        details.classList.add("details");  
-        tags.classList.add("tags");
+//             task_item.classList.add("task_item");
+//             task_content.classList.add("task_content");
+//             features.classList.add("features");
+//             details.classList.add("details");
+//             tags.classList.add("tags");
         
 
-        task_content.innerHTML = `<input type ="text" value = "${backlog.title}" readonly>`;
+//             task_content.innerHTML = `<input type ="text" value = "${todo.title}" readonly>`;
 
         
-        category.innerHTML = backlog.category;
-        priority.innerHTML = backlog.priority;
-        due_date.innerHTML = backlog.due_date;
+//             category.innerHTML = todo.category;
+//             priority.innerHTML = todo.priority;
+//             due_date.innerHTML = todo.due_date;
 
-        let tags_list = [];
-        tags_list = backlog.task_tags;
-            tags_list.forEach((tag) => {
-            const tag_value = document.createElement("span");
-            tag_value.innerHTML = "# " + tag;
-            tags.appendChild(tag_value);
-             })
+//             let tags_list = [];
+//             tags_list = todo.task_tags;
+//             tags_list.forEach((tag) => {
+//                 const tag_value = document.createElement("span");
+//                 tag_value.innerHTML = "# " + tag;
+//                 tags.appendChild(tag_value);
+//             })
         
-        details.appendChild(category);
-        details.appendChild(priority);
-        details.appendChild(due_date);
+//             details.appendChild(category);
+//             details.appendChild(priority);
+//             details.appendChild(due_date);
 
-        features.appendChild(details);
-        features.appendChild(tags);
+//             features.appendChild(details);
+//             features.appendChild(tags);
         
-        task_item.appendChild(task_content);
-        task_item.appendChild(features);
-
-        backlogs_container.appendChild(task_item);
-        backlogs_container.appendChild(go_back);
+//             task_item.appendChild(task_content);
+//             task_item.appendChild(features);
 
 
+//             backlogs_container.appendChild(task_item);
+//         }
+
+            
         
-    }) 
+
+//     })
+
+//     const go_back = document.createElement("button");
+//             go_back.type = "button";
+//             go_back.classList.add("go_back");
+//             go_back.innerHTML = "Go Back";
+//             backlogs_container.appendChild(go_back);
     
     
-}
+// }
+
+
 
 function helper(todo, todoList)
 {
    
 
-        console.log(todo.category);
-        console.log(todo.priority);
-        console.log(todo.due_date);
-        console.log(todo.task_tags);
+        // console.log(todo.category);
+        // console.log(todo.priority);
+        // console.log(todo.due_date);
+        // console.log(todo.task_tags);
 
 
         const task_item = document.createElement("div")
@@ -315,6 +362,75 @@ function helper(todo, todoList)
     return delete_task;
 }
 
+function DisplaySearchItems(searchString)
+{
+        const todoList = document.querySelector(".tasks_container");
+        todoList.innerHTML = '';
+
+        todos.forEach(todo => {
+            // let found = false;
+          
+            if (todo.title.includes(searchString) || todo.task_tags.includes(searchString, 0) )
+            {   
+                
+                const delete_task = helper(todo, todoList);
+                delete_task.addEventListener('click', e => {
+                    console.log("delete task");
+                    todos = todos.filter(t => {
+                        return t != todo;
+                    })
+                    localStorage.setItem("todos", JSON.stringify(todos));
+                    DisplaySearchItems(searchString);
+                })
+            }
+            
+        }) 
+}
+function DisplayBacklogs()
+{
+     const todoList = document.querySelector(".tasks_container");
+    todoList.innerHTML = '';
+    todos.forEach(todo => {
+
+        if (!todo.completed) {
+            const delete_task = helper(todo, todoList);
+
+            // const delete_task = document.querySelector(".delete_task");
+            delete_task.addEventListener('click', e => {
+                console.log("delete task");
+                todos = todos.filter(t => {
+                    return t != todo;
+                })
+                localStorage.setItem("todos", JSON.stringify(todos));
+                DisplayBacklogs();
+            })
+
+            // if (!todo.completed)
+            // {
+            //     backlogs.push(todo);
+            //  }
+
+        
+        }
+    })
+
+            const go_back = document.createElement("button");
+            go_back.type = "button";
+            go_back.classList.add("go_back");
+            go_back.innerHTML = "Go Back";
+            todoList.appendChild(go_back);
+    
+            go_back.addEventListener('click', e => {
+                // const backlogs_container = document.querySelector(".backlogs_container");
+                // backlogs_container.style.display = 'none';
+                //  tasks_container.style.display = 'flex';
+                DisplayTodos();
+            })
+        
+}
+
+
+
 function Filter(priority_filter_value,category_filter_value,duedate_filter_value)
 {           
 
@@ -353,25 +469,13 @@ function Filter(priority_filter_value,category_filter_value,duedate_filter_value
 }
 
 function Display_sorted_todos(sort_value) {
-    if (sort_value == "None") DisplayTodos();
+    if (sort_value == "None") {
+        DisplayTodos();
+    }
     else {  
         console.log('sorting applied');
         const todoList = document.querySelector(".tasks_container");
                 todoList.innerHTML = '';
-        todos.forEach(todo => {
-            if (todo.priority == "High")
-            {
-                const delete_task = helper(todo, todoList);
-                delete_task.addEventListener('click', e => {
-                        console.log("delete task");
-                        todos = todos.filter(t => {
-                            return t != todo;
-                        })
-                        localStorage.setItem("todos", JSON.stringify(todos));
-                        Display_sorted_todos(sort_value);
-                    })
-            }
-        })
         todos.forEach(todo => {
             if (todo.priority == "High")
             {
@@ -414,6 +518,7 @@ function Display_sorted_todos(sort_value) {
                     })
             }
         })
+        
 
     }
 }
