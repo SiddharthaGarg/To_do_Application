@@ -20,6 +20,7 @@ window.addEventListener("load", (e) => {
   const add_task = document.querySelector(".add_task");
   const add_tags = document.querySelector(".add_tags");
   const view_backlogs = document.querySelector(".view_backlogs");
+  const view_activity_logs = document.querySelector(".view_activity_logs");
 
   const filter_priority = document.querySelector(".filter_priority");
   const filter_category = document.querySelector(".filter_category");
@@ -60,6 +61,10 @@ window.addEventListener("load", (e) => {
         type: "task_added",
         details: document.querySelector("input").value,
       };
+
+      activity_logs.push(a_log);
+      localStorage.setItem("activity_logs", JSON.stringify(activity_logs));
+      console.log(a_log);
 
       todos.push(todo);
       localStorage.setItem("todos", JSON.stringify(todos));
@@ -112,6 +117,10 @@ window.addEventListener("load", (e) => {
       //  tasks_container.style.display = 'flex';
       DisplayTodos();
     });
+  });
+
+  view_activity_logs.addEventListener("click", (e) => {
+    DisplayActivitylogs();
   });
 
   //Search functionality
@@ -199,6 +208,19 @@ function getDateTime() {
   return dateTime;
 
   // console.log(dateTime)
+}
+
+function delete_activity_log(task_title) {
+  const a_log = {
+    userId: 1,
+    timestamp: getDateTime(),
+    type: "task_deleted",
+    details: task_title,
+  };
+
+  activity_logs.push(a_log);
+  localStorage.setItem("activity_logs", JSON.stringify(activity_logs));
+  console.log(a_log);
 }
 function helper(todo, todoList) {
   // console.log(todo.category);
@@ -305,6 +327,17 @@ function helper(todo, todoList) {
       e.target.setAttribute("readonly", true);
       localStorage.setItem("todos", JSON.stringify(todos));
 
+      const a_log = {
+        userId: 1,
+        timestamp: getDateTime(),
+        type: "task_edited",
+        details: e.target.value,
+      };
+
+      activity_logs.push(a_log);
+      localStorage.setItem("activity_logs", JSON.stringify(activity_logs));
+      console.log(a_log);
+
       //  DisplayTodos();
     });
   });
@@ -342,10 +375,35 @@ function DisplaySearchItems(searchString) {
           return t != todo;
         });
         localStorage.setItem("todos", JSON.stringify(todos));
+
+        delete_activity_log(todo.title);
         DisplaySearchItems(searchString);
       });
     }
   });
+}
+
+function DisplayActivitylogs() {
+  const activity_log_container = document.querySelector(
+    ".activity_log_container"
+  );
+  activity_log_container.style.visibility = "visible";
+  activity_log_container.innerHTML = "";
+  let alogs_content = "<h4>Activity logs history</h4>";
+  if (activity_logs.length === 0) {
+    alogs_content += "<p>No activity till now</p>";
+  } else {
+    alogs_content += "<ul>";
+    activity_logs.forEach((log) => {
+      alogs_content += `<li><strong>${log.timestamp}</strong>-${log.type}: ${log.details}</li>`;
+    });
+    alogs_content += "</ul>";
+  }
+  activity_log_container.innerHTML = alogs_content;
+
+  setTimeout(() => {
+    activity_log_container.style.visibility = "hidden";
+  }, 10000);
 }
 function DisplayBacklogs() {
   const todoList = document.querySelector(".tasks_container");
@@ -361,6 +419,8 @@ function DisplayBacklogs() {
           return t != todo;
         });
         localStorage.setItem("todos", JSON.stringify(todos));
+        delete_activity_log(todo.title);
+
         DisplayBacklogs();
       });
 
@@ -415,6 +475,7 @@ function Filter(
           return t != todo;
         });
         localStorage.setItem("todos", JSON.stringify(todos));
+        delete_activity_log(todo.title);
         Filter(priority_filter_value);
       });
     }
@@ -437,6 +498,7 @@ function Display_sorted_todos(sort_value) {
             return t != todo;
           });
           localStorage.setItem("todos", JSON.stringify(todos));
+          delete_activity_log(todo.title);
           Display_sorted_todos(sort_value);
         });
       }
@@ -450,6 +512,7 @@ function Display_sorted_todos(sort_value) {
             return t != todo;
           });
           localStorage.setItem("todos", JSON.stringify(todos));
+          delete_activity_log(todo.title);
           Display_sorted_todos(sort_value);
         });
       }
@@ -463,6 +526,7 @@ function Display_sorted_todos(sort_value) {
             return t != todo;
           });
           localStorage.setItem("todos", JSON.stringify(todos));
+          delete_activity_log(todo.title);
           Display_sorted_todos(sort_value);
         });
       }
@@ -483,6 +547,8 @@ function DisplayTodos() {
         return t != todo;
       });
       localStorage.setItem("todos", JSON.stringify(todos));
+
+      delete_activity_log(todo.title);
       DisplayTodos();
     });
 
